@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBowling"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Bowling Game!" Height="350" Width="750">
     <Grid>
-            <TextBlock>Hello there. </TextBlock>
+            <TextBlock> Welcome to the Bowling Game! </TextBlock>
+        <TextBlock Name="ScoreTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" />
     </Grid>
 </Window>

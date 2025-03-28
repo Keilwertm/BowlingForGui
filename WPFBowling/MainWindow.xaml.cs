@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFBowling.Models;
 
 namespace WPFBowling;
 
@@ -19,5 +20,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        BowlingCalculator calculator = new BowlingCalculator();
+        calculator.strike = 10;
+        
+        ScoreTextBlock.Text = $"Strike score: {calculator.strike}";
     }
-}
+} 
