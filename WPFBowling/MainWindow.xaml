@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPFBowling.MainWindow"
+﻿<Window x:Class="WPFBowling.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,6 +8,16 @@
         Title="Bowling Game!" Height="350" Width="750">
     <Grid>
             <TextBlock> Welcome to the Bowling Game! </TextBlock>
-        <TextBlock Name="ScoreTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" />
+        
+        <!-- Total TextBox - Display and input total value -->
+        <TextBox Name="TotalTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
+                 Width="200" Height="30" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center"
+                 IsReadOnly="True"/>
+
+        <!-- RoundInput TextBox - For user to enter amount to decrease total -->
+        <TextBox Name="RoundInputTextBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
+                 Width="200" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                 KeyDown="RoundInputTextBox_KeyDown"/>
+        
     </Grid>
 </Window>

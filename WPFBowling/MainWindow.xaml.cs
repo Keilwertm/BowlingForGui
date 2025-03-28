@@ -9,20 +9,34 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFBowling.Models;
+using System.Windows;
+using System.Windows.Input;
+using WPFBowling.ViewModels;
 
-namespace WPFBowling;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace WPFBowling.Views
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-        BowlingCalculator calculator = new BowlingCalculator();
-        calculator.strike = 10;
-        
-        ScoreTextBlock.Text = $"Strike score: {calculator.strike}";
+        public BowlingViewModel ViewModel { get; set; }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            
+            ViewModel = new BowlingViewModel
+            {
+                Total = 100  // starting total, I need to change this to the user inputed round number
+            };
+            DataContext = ViewModel;
+        }
+
+        // Enter is input, and then the total is decresed from the above total. 
+        private void RoundInputTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ViewModel.DecreaseTotal();
+            }
+        }
     }
-} 
+}
