@@ -20,8 +20,7 @@
                  Width="35" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
                  KeyDown="RoundInputTextBox_KeyDown"/>
         
-        <!-- First StackPanel in Grid.Row="1" -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60">
             <TextBox Width="50" Margin="2"/>
             <TextBox Width="50" Margin="2"/>
             <TextBox Width="50" Margin="2"/>
@@ -33,9 +32,21 @@
             <TextBox Width="50" Margin="2"/>
             <TextBox Width="50" Margin="2"/>
         </StackPanel>
-
-        <!-- Second StackPanel in Grid.Row="3" -->
+        
         <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,30,55,0">
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+        </StackPanel>
+        
+        <StackPanel Name="PinsLeftover" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,25,55,0">
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>

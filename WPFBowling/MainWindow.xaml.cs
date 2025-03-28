@@ -36,7 +36,7 @@ namespace WPFBowling.Views
             {
                 if (int.TryParse(RoundInputTextBox.Text, out int userValue))
                 {
-                    ViewModel.Total = userValue; // Update total based on user input
+                    ViewModel.Total = userValue; // Update total based on user input but I think it just subtracts right now 
                 }
             }
         }
