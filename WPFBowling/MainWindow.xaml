@@ -6,18 +6,46 @@
         xmlns:local="clr-namespace:WPFBowling"
         mc:Ignorable="d"
         Title="Bowling Game!" Height="350" Width="750">
+    
     <Grid>
-            <TextBlock> Welcome to the Bowling Game! </TextBlock>
+        <TextBlock> Welcome to the Bowling Game! </TextBlock>
         
         <!-- Total TextBox - Display and input total value -->
         <TextBox Name="TotalTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="200" Height="30" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center"
+                 Width="35" Height="30" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                  IsReadOnly="True"/>
 
         <!-- RoundInput TextBox - For user to enter amount to decrease total -->
         <TextBox Name="RoundInputTextBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="200" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                 Width="35" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
                  KeyDown="RoundInputTextBox_KeyDown"/>
         
+        <!-- First StackPanel in Grid.Row="1" -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50">
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+            <TextBox Width="50" Margin="2"/>
+        </StackPanel>
+
+        <!-- Second StackPanel in Grid.Row="3" -->
+        <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,30,55,0">
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15"/>
+        </StackPanel>
     </Grid>
 </Window>

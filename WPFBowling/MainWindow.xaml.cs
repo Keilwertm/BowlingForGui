@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WPFBowling.ViewModels;
 
@@ -11,20 +12,32 @@ namespace WPFBowling.Views
         public MainWindow()
         {
             InitializeComponent();
-            
+
             ViewModel = new BowlingViewModel
             {
-                Total = 100  // starting total, I need to change this to the user inputed round number
+                Total = 0  // Default starting total
             };
             DataContext = ViewModel;
+
+            // Initialize TextBoxes with 1-10
+            for (int i = 0; i < RoundDisplay.Children.Count; i++)
+            {
+                if (RoundDisplay.Children[i] is TextBox textBox)
+                {
+                    textBox.Text = (i + 1).ToString();
+                }
+            }
         }
 
-        // Enter is input, and then the total is decresed from the above total. 
+        // Handle Enter key event for RoundInputTextBox
         private void RoundInputTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                ViewModel.DecreaseTotal();
+                if (int.TryParse(RoundInputTextBox.Text, out int userValue))
+                {
+                    ViewModel.Total = userValue; // Update total based on user input
+                }
             }
         }
     }
