@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFBowling"
         mc:Ignorable="d"
         Title="Bowling Game!" Height="350" Width="750">
     
@@ -20,20 +19,34 @@
                  Width="35" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
                  KeyDown="RoundInputTextBox_KeyDown"/>
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60">
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
-            <TextBox Width="50" Margin="2"/>
+        <StackPanel Name="secondDelivary" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,45,55,0">
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+        </StackPanel>
+
+        
+        <StackPanel Name="TotalScore" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,45,55,0">
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
         </StackPanel>
         
-        <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,30,55,0">
+        <StackPanel Name="PinsLeftover" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,30,55,0">
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>
@@ -46,7 +59,7 @@
             <TextBox Width="25" Margin="15"/>
         </StackPanel>
         
-        <StackPanel Name="PinsLeftover" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,25,55,0">
+        <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,30,55,0">
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>
@@ -58,5 +71,6 @@
             <TextBox Width="25" Margin="15"/>
             <TextBox Width="25" Margin="15"/>
         </StackPanel>
+        
     </Grid>
 </Window>
