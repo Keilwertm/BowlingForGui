@@ -12,7 +12,7 @@
     
     <Grid>
         
-        <TextBlock> Welcome to the Bowling Game! </TextBlock>
+        <TextBlock Text="Welcome To The Bowling Game!" Foreground="White"/>
         
         <!-- This will show the score from the current round -->
         <TextBox Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
@@ -79,6 +79,8 @@
             <TextBox Width="25" Margin="15" IsReadOnly="True"/>
             <TextBox Width="25" Margin="15" IsReadOnly="True"/>
         </StackPanel>
+        
+      
         
     </Grid>
 </Window>

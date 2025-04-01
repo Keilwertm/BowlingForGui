@@ -10,9 +10,9 @@ namespace WPFBowling.Views
     public partial class MainWindow : Window
     {
         public BowlingViewModel ViewModel { get; set; }
-        
-        private int frameIndex = 0; 
-        
+
+        private int frameIndex = 0;
+
         private void RoundInputTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!Regex.IsMatch(e.Text, "^[0-9]+$"))
@@ -44,13 +44,13 @@ namespace WPFBowling.Views
 
         // This generates a random number everytime they hit enter on the RoundInputTextBox
 
-        private Random random = new Random(); 
+        private Random random = new Random();
 
         private void RoundInputTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                int randomValue = random.Next(1, 11); // Generate a number between 1 and 10
+                int randomValue = random.Next(1, 11); 
                 StartingPositionBox.Text = randomValue.ToString();
             }
 
@@ -63,20 +63,26 @@ namespace WPFBowling.Views
                         if (userInput == generatedNumber)
                         {
                             ResultTextBox.Text = "Strike!";
-                            userInput = 10; // Strike always counts as 10
+                            userInput = 10; 
+                        }
+                        else if (userInput < generatedNumber) 
+                        {
+                            int randomMoreThan = random.Next(6, 11);
+                            ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
+                            userInput = randomMoreThan;
                         }
                         else
                         {
                             ResultTextBox.Text = $"You knocked over {userInput} pins.";
                         }
 
-                        // Update the next TextBox in TotalScore
+                        // Updates the textbox to match the totalscore
                         if (frameIndex < TotalScore.Children.Count)
                         {
                             if (TotalScore.Children[frameIndex] is TextBox textBox)
                             {
-                                textBox.Text = userInput.ToString(); 
-                                frameIndex++; 
+                                textBox.Text = userInput.ToString();
+                                frameIndex++;
                             }
                         }
                     }
@@ -90,20 +96,24 @@ namespace WPFBowling.Views
                     ResultTextBox.Text = "Invalid input! ⛔";
                 }
             }
-            
-            if (frameIndex >= TotalScore.Children.Count)
-            {
-                frameIndex = 0; // Reset to start over after all ten boxes have a value
-                foreach (var child in TotalScore.Children)
+
+                if (frameIndex >= TotalScore.Children.Count)
                 {
-                    if (child is TextBox textBox)
+                    frameIndex = 0; // Reset to start over after all ten boxes have a value
+                    foreach (var child in TotalScore.Children)
                     {
-                        textBox.Text = ""; 
+                        if (child is TextBox textBox)
+                        {
+                            textBox.Text = "";
+                        }
                     }
                 }
             }
-
-
         }
     }
-}
+    
+    // I still have to account for spares, add up total scores, display the first result as the number of pins on the bottom row, restrict int inputs on the box, and add a plus one to the enter limit so it actually displays the score of the tenth round.
+    // Once that is done I can throw in some simple automation and test cases to validate at the end.
+    // If I have time I want to add the last round to the tenth round, add a Icon to the task bar, improve the look, and add a animation of some sort. 
+    // It would be really cool to have the number of pins fall down across the screen corresponding to the amount of pins that you knock down
+    
