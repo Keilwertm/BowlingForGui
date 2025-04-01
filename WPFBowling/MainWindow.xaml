@@ -6,6 +6,10 @@
         mc:Ignorable="d"
         Title="Bowling Game!" Height="350" Width="750">
     
+    <Window.Background>
+        <ImageBrush ImageSource="greenbackground.jpg" Stretch="Fill"/>
+    </Window.Background>
+    
     <Grid>
         
         <TextBlock> Welcome to the Bowling Game! </TextBlock>

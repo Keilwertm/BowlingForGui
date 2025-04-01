@@ -23,10 +23,10 @@ C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\n
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.runtimeconfig.json
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.dll
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.pdb
+C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\MainWindow.baml
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\MainWindow.g.cs
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\App.g.cs
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling_MarkupCompile.cache
-C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\MainWindow.baml
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.g.resources
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.AssemblyInfoInputs.cache
