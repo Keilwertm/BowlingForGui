@@ -1,5 +1,7 @@
 using System.ComponentModel;
 
+// This section updates information and notifies the app when textboxes have been updated
+
 namespace WPFBowling.ViewModels
 {
     public class BowlingViewModel : INotifyPropertyChanged

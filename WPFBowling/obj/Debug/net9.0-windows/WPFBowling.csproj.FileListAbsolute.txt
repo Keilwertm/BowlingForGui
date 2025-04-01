@@ -18,11 +18,6 @@ C:\Users\mkeilwert\RiderProjects\WPFBowling\WPFBowling\obj\Debug\net9.0-windows\
 C:\Users\mkeilwert\RiderProjects\WPFBowling\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.pdb
 C:\Users\mkeilwert\RiderProjects\WPFBowling\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.genruntimeconfig.cache
 C:\Users\mkeilwert\RiderProjects\WPFBowling\WPFBowling\obj\Debug\net9.0-windows\ref\WPFBowling.dll
-C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.exe
-C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.deps.json
-C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.runtimeconfig.json
-C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.dll
-C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.pdb
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\MainWindow.baml
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\MainWindow.g.cs
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\App.g.cs
@@ -33,6 +28,11 @@ C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\n
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.AssemblyInfo.cs
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.csproj.CoreCompileInputs.cache
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.sourcelink.json
+C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.exe
+C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.deps.json
+C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.runtimeconfig.json
+C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.dll
+C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\bin\Debug\net9.0-windows\WPFBowling.pdb
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.dll
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\refint\WPFBowling.dll
 C:\Users\mkeilwert\RiderProjects\WPFBowling\BowlingForGui\WPFBowling\obj\Debug\net9.0-windows\WPFBowling.pdb

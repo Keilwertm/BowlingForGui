@@ -1,5 +1,6 @@
 namespace WPFBowling.Models;
 
+// I'm not sure I even need this section. All the logic is working in the XAML file. 
 public class BowlingCalculator
 {
     public int strike { get; set; }         // All ten pins knocked in the first delivery 
@@ -13,11 +14,4 @@ public class BowlingCalculator
     public int playerPosition { get; set; }
     public int strikePosition { get; set; }  // user enters a position, strike and gutter are assigned to a random number. Otherwise a random number of pins are knocked over.
     public int gutterPosition { get; set; }
-    
-    // I know declaring when needed is best practice but this helps my brain put together what is needed as I go through step by step
-}
-
-public class roundHandeling
-{
-    
 }
