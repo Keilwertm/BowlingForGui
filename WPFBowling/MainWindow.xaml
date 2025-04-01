@@ -7,19 +7,22 @@
         Title="Bowling Game!" Height="350" Width="750">
     
     <Grid>
+        
         <TextBlock> Welcome to the Bowling Game! </TextBlock>
         
-        <!-- Total TextBox - Display and input total value -->
+        <!-- This will show the score from the current round -->
         <TextBox Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
                  Width="35" Height="30" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                  IsReadOnly="True"/>
 
-        <!-- RoundInput TextBox - For user to enter amount to decrease total -->
+        <!-- User input to show the entered position -->
         <TextBox Name="RoundInputTextBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="35" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                 Width="35" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                 KeyDown="RoundInputTextBox_KeyDown"/>
         
+        <!-- shows the random position that was a strike maybe? -->
         <TextBox Name="StartingPositionBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="35" Height="30" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                 Width="35" Height="30" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" IsReadOnly="True"/>
         
         <StackPanel Name="DelivaryResult" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,55,55,0">
             <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
@@ -61,16 +64,16 @@
         </StackPanel>
         
         <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,30,55,0">
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
         </StackPanel>
         
     </Grid>
