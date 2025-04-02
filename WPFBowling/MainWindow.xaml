@@ -80,7 +80,5 @@
             <TextBox Width="25" Margin="15" IsReadOnly="True"/>
         </StackPanel>
         
-      
-        
     </Grid>
 </Window>

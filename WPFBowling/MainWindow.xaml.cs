@@ -60,29 +60,51 @@ namespace WPFBowling.Views
                 {
                     if (int.TryParse(StartingPositionBox.Text, out int generatedNumber))
                     {
+                        int knockedOverPins = 0; // Variable to store the final result
+
                         if (userInput == generatedNumber)
                         {
                             ResultTextBox.Text = "Strike!";
-                            userInput = 10; 
+                            knockedOverPins = 10;
                         }
                         else if (userInput < generatedNumber) 
                         {
                             int randomMoreThan = random.Next(6, 11);
                             ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
-                            userInput = randomMoreThan;
+                            knockedOverPins = randomMoreThan;
+                        }
+                        else if (userInput > generatedNumber) 
+                        {
+                            int randomMoreThan = random.Next(1, 5);
+                            ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
+                            knockedOverPins = randomMoreThan;
                         }
                         else
                         {
                             ResultTextBox.Text = $"You knocked over {userInput} pins.";
+                            knockedOverPins = userInput;
                         }
 
                         // Updates the textbox to match the totalscore
+                        if (frameIndex < DelivaryResult.Children.Count)
+                        {
+                            if (DelivaryResult.Children[frameIndex] is TextBox textBox)
+                            {
+                                textBox.Text = knockedOverPins.ToString(); // Store the value in the textbox
+                                frameIndex++;
+                            }
+                        }
+                        
                         if (frameIndex < TotalScore.Children.Count)
                         {
-                            if (TotalScore.Children[frameIndex] is TextBox textBox)
+                            if (TotalScore.Children[frameIndex] is TextBox totalScoreBox)
                             {
-                                textBox.Text = userInput.ToString();
-                                frameIndex++;
+                                // Try to parse the current value, default to 0 if invalid or empty
+                                int currentTotal = int.TryParse(totalScoreBox.Text, out int existingValue) ? existingValue : 0;
+
+                                // Add new knockedOverPins value
+                                int newTotal = currentTotal + knockedOverPins;
+                                totalScoreBox.Text = newTotal.ToString();
                             }
                         }
                     }
