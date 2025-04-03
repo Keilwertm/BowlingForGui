@@ -16,17 +16,17 @@
         
         <!-- This will show the score from the current round -->
         <TextBox Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="180" Height="30" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                 Width="180" Height="20" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                  IsReadOnly="True"/>
 
         <!-- User input to show the entered position -->
         <TextBox Name="RoundInputTextBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="35" Height="30" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                 Width="35" Height="20" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
                  KeyDown="RoundInputTextBox_KeyDown"/>
         
         <!-- shows the random position that was a strike maybe? -->
         <TextBox Name="StartingPositionBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="35" Height="30" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" IsReadOnly="True"/>
+                 Width="35" Height="20" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" IsReadOnly="True"/>
         
         <StackPanel Name="DelivaryResult" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,55,55,0">
             <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>

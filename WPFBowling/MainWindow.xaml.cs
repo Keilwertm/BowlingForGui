@@ -9,6 +9,8 @@ namespace WPFBowling.Views
 {
     public partial class MainWindow : Window
     {
+        // Dictionary to store cumulative scores for each frame
+        Dictionary<int, int> frameScores = new Dictionary<int, int>();
         public BowlingViewModel ViewModel { get; set; }
 
         private int frameIndex = 0;
@@ -50,7 +52,7 @@ namespace WPFBowling.Views
         {
             if (e.Key == Key.Enter)
             {
-                int randomValue = random.Next(1, 11); 
+                int randomValue = random.Next(1, 11);
                 StartingPositionBox.Text = randomValue.ToString();
             }
 
@@ -67,13 +69,13 @@ namespace WPFBowling.Views
                             ResultTextBox.Text = "Strike!";
                             knockedOverPins = 10;
                         }
-                        else if (userInput < generatedNumber) 
+                        else if (userInput < generatedNumber)
                         {
                             int randomMoreThan = random.Next(6, 11);
                             ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
                             knockedOverPins = randomMoreThan;
                         }
-                        else if (userInput > generatedNumber) 
+                        else if (userInput > generatedNumber)
                         {
                             int randomMoreThan = random.Next(1, 5);
                             ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
@@ -85,7 +87,7 @@ namespace WPFBowling.Views
                             knockedOverPins = userInput;
                         }
 
-                        // Updates the textbox to match the totalscore
+                        // Updates the textbox to match the knocked over pins for each frame
                         if (frameIndex < DelivaryResult.Children.Count)
                         {
                             if (DelivaryResult.Children[frameIndex] is TextBox textBox)
@@ -94,17 +96,29 @@ namespace WPFBowling.Views
                                 frameIndex++;
                             }
                         }
-                        
-                        if (frameIndex < TotalScore.Children.Count)
-                        {
-                            if (TotalScore.Children[frameIndex] is TextBox totalScoreBox)
-                            {
-                                // Try to parse the current value, default to 0 if invalid or empty
-                                int currentTotal = int.TryParse(totalScoreBox.Text, out int existingValue) ? existingValue : 0;
 
-                                // Add new knockedOverPins value
+                        // Update cumulative score in the dictionary
+                        if (frameIndex <= TotalScore.Children.Count)
+                        {
+                            if (TotalScore.Children[frameIndex - 1] is TextBox totalScoreBox)
+                            {
+                                // Retrieve the existing total from the dictionary
+                                if (!frameScores.TryGetValue(frameIndex - 1, out int currentTotal))
+                                {
+                                    currentTotal = 0; // Default to 0 if not found
+                                }
+
+                                // Add knockedOverPins to the running total
                                 int newTotal = currentTotal + knockedOverPins;
+
+                                // Update the dictionary with the new total
+                                frameScores[frameIndex + 1] = newTotal;
+
+                                // Display the new total in the TextBox
                                 totalScoreBox.Text = newTotal.ToString();
+
+                                // Debugging output
+                                Console.WriteLine($"Frame {frameIndex - 1} - Total: {newTotal}");
                             }
                         }
                     }
@@ -119,21 +133,25 @@ namespace WPFBowling.Views
                 }
             }
 
-                if (frameIndex >= TotalScore.Children.Count)
+            // Reset the game after 10 frames
+            if (frameIndex >= TotalScore.Children.Count)
+            {
+                frameIndex = 0; // Reset to start over after all ten boxes have a value
+                foreach (var child in TotalScore.Children)
                 {
-                    frameIndex = 0; // Reset to start over after all ten boxes have a value
-                    foreach (var child in TotalScore.Children)
+                    if (child is TextBox textBox)
                     {
-                        if (child is TextBox textBox)
-                        {
-                            textBox.Text = "";
-                        }
+                        textBox.Text = "";
                     }
                 }
+
+                // Reset the dictionary to clear previous frame scores
+                frameScores.Clear();
             }
         }
     }
-    
+}
+
     // I still have to account for spares, add up total scores, display the first result as the number of pins on the bottom row, restrict int inputs on the box, and add a plus one to the enter limit so it actually displays the score of the tenth round.
     // Once that is done I can throw in some simple automation and test cases to validate at the end.
     // If I have time I want to add the last round to the tenth round, add a Icon to the task bar, improve the look, and add a animation of some sort. 
