@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WPFBowling")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9234be50bf8a068dabd5f67a25013b8bb0f4afa9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+821f7748dbd55b7f7499c63dacbef43e1cca35fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("WPFBowling")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WPFBowling")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

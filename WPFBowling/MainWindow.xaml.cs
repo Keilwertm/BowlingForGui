@@ -14,12 +14,17 @@ namespace WPFBowling.Views
         public BowlingViewModel ViewModel { get; set; }
 
         private int frameIndex = 0;
+        private int knockedDownThisFrame = 0;
+        private int currentIndex = 0;
+        private int remainingKnockedDown = 0;
+        private int remainingPins = 10;
+        private Random random = new Random();
 
         private void RoundInputTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!Regex.IsMatch(e.Text, "^[0-9]+$"))
             {
-                e.Handled = true; // Allows only numerical inputs 
+                e.Handled = true; 
             }
         }
 
@@ -35,120 +40,87 @@ namespace WPFBowling.Views
 
             DataContext = ViewModel;
 
+           
             for (int i = 0; i < RoundDisplay.Children.Count; i++)
             {
                 if (RoundDisplay.Children[i] is TextBox textBox)
                 {
-                    textBox.Text = (i + 1).ToString();
+                    textBox.Text = $"R:{i + 1}"; 
                 }
             }
+
         }
-
-        // This generates a random number everytime they hit enter on the RoundInputTextBox
-
-        private Random random = new Random();
-
-        private void RoundInputTextBox_KeyDown(object sender, KeyEventArgs e)
+       private void Button_Click(object sender, RoutedEventArgs e)
+{
+    if (currentIndex < 10)
+    {
+        // If we are starting a new frame (or after a strike), reset the remaining pins
+        if (remainingPins == 0 || knockedDownThisFrame == 0)
         {
-            if (e.Key == Key.Enter)
-            {
-                int randomValue = random.Next(1, 11);
-                StartingPositionBox.Text = randomValue.ToString();
-            }
-
-            if (e.Key == Key.Enter)
-            {
-                if (int.TryParse(RoundInputTextBox.Text, out int userInput))
-                {
-                    if (int.TryParse(StartingPositionBox.Text, out int generatedNumber))
-                    {
-                        int knockedOverPins = 0; // Variable to store the final result
-
-                        if (userInput == generatedNumber)
-                        {
-                            ResultTextBox.Text = "Strike!";
-                            knockedOverPins = 10;
-                        }
-                        else if (userInput < generatedNumber)
-                        {
-                            int randomMoreThan = random.Next(6, 11);
-                            ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
-                            knockedOverPins = randomMoreThan;
-                        }
-                        else if (userInput > generatedNumber)
-                        {
-                            int randomMoreThan = random.Next(1, 5);
-                            ResultTextBox.Text = $"You knocked over {randomMoreThan} pins!";
-                            knockedOverPins = randomMoreThan;
-                        }
-                        else
-                        {
-                            ResultTextBox.Text = $"You knocked over {userInput} pins.";
-                            knockedOverPins = userInput;
-                        }
-
-                        // Updates the textbox to match the knocked over pins for each frame
-                        if (frameIndex < DelivaryResult.Children.Count)
-                        {
-                            if (DelivaryResult.Children[frameIndex] is TextBox textBox)
-                            {
-                                textBox.Text = knockedOverPins.ToString(); // Store the value in the textbox
-                                frameIndex++;
-                            }
-                        }
-
-                        // Update cumulative score in the dictionary
-                        if (frameIndex <= TotalScore.Children.Count)
-                        {
-                            if (TotalScore.Children[frameIndex - 1] is TextBox totalScoreBox)
-                            {
-                                // Retrieve the existing total from the dictionary
-                                if (!frameScores.TryGetValue(frameIndex - 1, out int currentTotal))
-                                {
-                                    currentTotal = 0; // Default to 0 if not found
-                                }
-
-                                // Add knockedOverPins to the running total
-                                int newTotal = currentTotal + knockedOverPins;
-
-                                // Update the dictionary with the new total
-                                frameScores[frameIndex + 1] = newTotal;
-
-                                // Display the new total in the TextBox
-                                totalScoreBox.Text = newTotal.ToString();
-
-                                // Debugging output
-                                Console.WriteLine($"Frame {frameIndex - 1} - Total: {newTotal}");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ResultTextBox.Text = "Error reading generated number!";
-                    }
-                }
-                else
-                {
-                    ResultTextBox.Text = "Invalid input! ⛔";
-                }
-            }
-
-            // Reset the game after 10 frames
-            if (frameIndex >= TotalScore.Children.Count)
-            {
-                frameIndex = 0; // Reset to start over after all ten boxes have a value
-                foreach (var child in TotalScore.Children)
-                {
-                    if (child is TextBox textBox)
-                    {
-                        textBox.Text = "";
-                    }
-                }
-
-                // Reset the dictionary to clear previous frame scores
-                frameScores.Clear();
-            }
+            remainingPins = 10; 
         }
+        
+        int knockdown = random.Next(1, remainingPins + 1);
+        
+        knockedDownThisFrame = knockdown;
+        remainingPins -= knockdown;
+        
+        if (DelivaryResult.Children[currentIndex] is TextBox textBox)
+        {
+            textBox.Text = knockdown.ToString();
+        }
+
+        // Update the PinsLeftover TextBox with the remaining pins
+        if (PinsLeftover.Children[currentIndex] is TextBox leftoverTextBox)
+        {
+            leftoverTextBox.Text = remainingPins.ToString(); 
+        }
+        
+        int totalScore = remainingPins + knockedDownThisFrame;
+
+        // Update the TotalScore TextBox with the calculated total score
+        if (TotalScore.Children[currentIndex] is TextBox totalScoreTextBox)
+        {
+            totalScoreTextBox.Text = totalScore.ToString(); 
+        }
+        
+        if (totalScore == 10)
+        {
+            ResultTextBox.Text = $"You knocked over {totalScore} pins!";
+        }
+        if (remainingPins == 0)
+        {
+            currentIndex++; 
+            knockedDownThisFrame = 0; 
+        }
+    }
+}
+private void ResetTextBoxes()
+{
+    foreach (var child in DelivaryResult.Children)
+    {
+        if (child is TextBox textBox)
+        {
+            textBox.Clear(); 
+        }
+    }
+    foreach (var child in PinsLeftover.Children)
+    {
+        if (child is TextBox textBox)
+        {
+            textBox.Clear(); // The clearing does not work right now
+        }
+    }
+
+    foreach (var child in TotalScore.Children)
+    {
+        if (child is TextBox textBox)
+        {
+            textBox.Clear(); 
+        }
+    }
+}
+
     }
 }
 
@@ -156,4 +128,8 @@ namespace WPFBowling.Views
     // Once that is done I can throw in some simple automation and test cases to validate at the end.
     // If I have time I want to add the last round to the tenth round, add a Icon to the task bar, improve the look, and add a animation of some sort. 
     // It would be really cool to have the number of pins fall down across the screen corresponding to the amount of pins that you knock down
-    
+
+
+
+    // now - change the roll to a button. It just rolls 1-10. You click roll again to hit the spares, it randomly hits the spares. Finally, if there is a strike it skips the spare step. A strike is a ten, not a randomly generated number to make things easier. 
+    // I think at the end I can add if they get two strikes I can add another text box to appear for the third round...

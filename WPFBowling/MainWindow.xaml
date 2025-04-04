@@ -11,23 +11,36 @@
     </Window.Background>
     
     <Grid>
-        
         <TextBlock Text="Welcome To The Bowling Game!" Foreground="White"/>
-        
+
         <!-- This will show the score from the current round -->
         <TextBox Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
                  Width="180" Height="20" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                  IsReadOnly="True"/>
+        
+        <Button Content="Roll It!" Width="100" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <Setter Property="BorderBrush" Value="DarkBlue"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Padding" Value="10"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="SkyBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
-        <!-- User input to show the entered position -->
-        <TextBox Name="RoundInputTextBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="35" Height="20" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                 KeyDown="RoundInputTextBox_KeyDown"/>
-        
-        <!-- shows the random position that was a strike maybe? -->
-        <TextBox Name="StartingPositionBox" Text="{Binding RoundInput, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="35" Height="20" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" IsReadOnly="True"/>
-        
         <StackPanel Name="DelivaryResult" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,55,55,0">
             <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
             <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
@@ -55,29 +68,29 @@
         </StackPanel>
         
         <StackPanel Name="TotalScore" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,30,55,0">
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
-            <TextBox Width="25" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15"/>
         </StackPanel>
         
         <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,30,55,0">
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="25" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
         </StackPanel>
         
     </Grid>
