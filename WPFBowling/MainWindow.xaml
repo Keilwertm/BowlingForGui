@@ -4,19 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Bowling Game!" Height="350" Width="750">
-    
-    <Window.Background>
-        <ImageBrush ImageSource="greenbackground.jpg" Stretch="Fill"/>
-    </Window.Background>
+        Title="Bowling Game!" Height="350" Width="750"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+        
     
     <Grid>
+        
+        <Border Background="Black" CornerRadius="10" Opacity="0.8"/>
         <TextBlock Text="Welcome To The Bowling Game!" Foreground="White"/>
 
         <!-- This will show the score from the current round -->
-        <TextBox Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
-                 Width="180" Height="20" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                 IsReadOnly="True"/>
+        <TextBox  Style="{StaticResource TBstyle}" Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
+                  Width="180" Height="40" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                  IsReadOnly="True"/>
         
         <Button Content="Roll It!" Width="100" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click">
             <Button.Template>
@@ -42,55 +45,55 @@
         </Button>
 
         <StackPanel Name="DelivaryResult" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,55,55,0">
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="1,0,0,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
         </StackPanel>
         
         <StackPanel Name="PinsLeftover" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,55,55,0">
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
-            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="25" Margin="15" BorderThickness="0,0,1,1" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
         </StackPanel>
         
         <StackPanel Name="TotalScore" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,30,55,0">
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
-            <TextBox Width="26" Margin="15"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
         </StackPanel>
         
         <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,30,55,0">
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
-            <TextBox Width="26" Margin="15" IsReadOnly="True"/>
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
         </StackPanel>
         
     </Grid>
