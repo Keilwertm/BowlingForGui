@@ -8,13 +8,30 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
-        
+        Background="Transparent"
+        MouseDown="Window_MouseDown">
     
     <Grid>
         
-        <Border Background=" DarkGreen" CornerRadius="10" Opacity="0.8"/>
-        <TextBlock Text="Welcome To The Bowling Game!" Foreground="White"/>
+        <Button Content="_" Width="30" Height="30"
+                HorizontalAlignment="Right" Margin="0,10,50,0"
+                VerticalAlignment="Top"
+                Background="Transparent" Foreground="White"
+                BorderBrush="Transparent"
+                Click="MinimizeButton_Click"/>
+        
+        <Button Content="X"
+                Width="30" Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="Transparent"
+                Foreground="White"
+                BorderBrush="Transparent"
+                Click="CloseButton_Click"/>
+        
+        <Border Background="DarkSlateGray" BorderBrush="DarkCyan" BorderThickness="10" CornerRadius="10" Opacity="0.8"/>
+        <TextBlock Text="Welcome To The Bowling Game!" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontWeight="Bold"/>
 
         <!-- This will show the score from the current round -->
         <TextBox  Style="{StaticResource TBstyle}" Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
@@ -31,8 +48,8 @@
             </Button.Template>
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="LightBlue"/>
-                    <Setter Property="BorderBrush" Value="DarkBlue"/>
+                    <Setter Property="Background" Value="MintCream"/>
+                    <Setter Property="BorderBrush" Value="Salmon"/>
                     <Setter Property="BorderThickness" Value="2"/>
                     <Setter Property="Padding" Value="10"/>
                     <Style.Triggers>
