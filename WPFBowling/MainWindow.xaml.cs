@@ -9,6 +9,61 @@ namespace WPFBowling.Views
 {
     public partial class MainWindow : Window
     {
+        private void UpdateCumulativeScores()
+        {
+            int score = 0;
+            int rollIndex = 0;
+
+            for (int frame = 0; frame < 10; frame++)
+            {
+                if (rollIndex >= rolls.Count)
+                    break;
+
+                // Strike
+                if (rolls[rollIndex] == 10)
+                {
+                    if (rollIndex + 2 < rolls.Count)
+                    {
+                        score += 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+                        if (TotalScore.Children[frame] is TextBox scoreBox)
+                            scoreBox.Text = score.ToString();
+                    }
+                    else
+                        break;
+
+                    rollIndex += 1;
+                }
+                // Spare or open
+                else if (rollIndex + 1 < rolls.Count)
+                {
+                    int frameTotal = rolls[rollIndex] + rolls[rollIndex + 1];
+
+                    if (frameTotal == 10) // Spare
+                    {
+                        if (rollIndex + 2 < rolls.Count)
+                        {
+                            score += 10 + rolls[rollIndex + 2];
+                            if (TotalScore.Children[frame] is TextBox scoreBox)
+                                scoreBox.Text = score.ToString();
+                        }
+                        else break;
+                    }
+                    else // Open
+                    {
+                        score += frameTotal;
+                        if (TotalScore.Children[frame] is TextBox scoreBox)
+                            scoreBox.Text = score.ToString();
+                    }
+
+                    rollIndex += 2;
+                }
+                else
+                {
+                    break; 
+                }
+            }
+        }
+
         private void ResetGame()
         {
             rolls.Clear();
@@ -17,19 +72,19 @@ namespace WPFBowling.Views
             frameIndex = 0;
             totalScore = 0;
             currentBoxIndex = 0;
-            
+
             foreach (var child in DelivaryResult.Children)
             {
                 if (child is TextBox box)
                     box.Text = "";
             }
-            
+
             foreach (var child in PinsLeftover.Children)
             {
                 if (child is TextBox box)
                     box.Text = "";
             }
-            
+
             foreach (var child in TotalScore.Children)
             {
                 if (child is TextBox box)
@@ -39,7 +94,7 @@ namespace WPFBowling.Views
             ResultTextBox.Text = "Game reset. Ready to roll!";
         }
 
-        
+
         // Dictionary to store cumulative scores for each frame
         Dictionary<int, int> frameScores = new Dictionary<int, int>();
         public BowlingViewModel ViewModel { get; set; }
@@ -48,14 +103,15 @@ namespace WPFBowling.Views
 
         private void RoundInputTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!Regex.IsMatch(e.Text, "^[0-9]+$"))
+            if (!Regex.IsMatch(e.Text, "^[0-10]+$"))
             {
                 e.Handled = true;
             }
         }
+
         public MainWindow()
         {
-            
+
             InitializeComponent();
 
             ViewModel = new BowlingViewModel
@@ -76,7 +132,7 @@ namespace WPFBowling.Views
         }
 
         private List<int> rolls = new List<int>(); // store individual rolls
-        private int rollInFrame = 1; 
+        private int rollInFrame = 1;
         private int remainingPins = 10;
         private int frameIndex = 0;
         private int totalScore = 0;
@@ -91,28 +147,43 @@ namespace WPFBowling.Views
                 return;
             }
 
-
             int knockdown = random.Next(0, remainingPins + 1);
             rolls.Add(knockdown);
-            totalScore += knockdown;
 
             if (DelivaryResult.Children[currentBoxIndex] is TextBox deliveryBox)
-                deliveryBox.Text = knockdown.ToString();
+            {
+                string rollText;
+
+                // STRIKE (only on first roll of frame)
+                if (knockdown == 10 && rollInFrame == 1)
+                {
+                    rollText = "X";
+                }
+                // SPARE (only on second roll of frame, and total pins in frame == 10)
+                else if (rollInFrame == 2 && rolls.Count >= 2 &&
+                         rolls[rolls.Count - 2] + knockdown == 10)
+                {
+                    rollText = "/";
+                }
+                else
+                {
+                    rollText = knockdown.ToString();
+                }
+
+                deliveryBox.Text = rollText;
+            }
 
             if (PinsLeftover.Children[currentBoxIndex] is TextBox leftoverBox)
                 leftoverBox.Text = (remainingPins - knockdown).ToString();
 
-            if (TotalScore.Children[frameIndex] is TextBox scoreBox)
-                scoreBox.Text = totalScore.ToString();
-
             ResultTextBox.Text = $"You knocked over {knockdown} pin(s)!";
-
             currentBoxIndex++;
             remainingPins -= knockdown;
 
+            // Frame handling
             if (rollInFrame == 1)
             {
-                if (knockdown == 10)
+                if (knockdown == 10) // Strike
                 {
                     frameIndex++;
                     rollInFrame = 1;
@@ -129,19 +200,24 @@ namespace WPFBowling.Views
                 rollInFrame = 1;
                 remainingPins = 10;
             }
+            
+            Console.WriteLine($"Frame: {frameIndex}, RollInFrame: {rollInFrame}, Rolls: {string.Join(",", rolls)}");
+            
+            UpdateCumulativeScores();
         }
+
         
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-        
+
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;

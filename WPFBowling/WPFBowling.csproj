@@ -13,6 +13,8 @@
       <Resource Include="greenbackground.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="bowlingIcon.ico" />
+      <Resource Include="bowlingIcon.ico" />
     </ItemGroup>
 
 </Project>

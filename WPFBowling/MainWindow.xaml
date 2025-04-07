@@ -9,9 +9,12 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        MouseDown="Window_MouseDown">
+        MouseDown="Window_MouseDown"
+        Icon="bowlingIcon.ico">
     
     <Grid>
+        
+        <Border Background="DarkSlateGray" BorderBrush="DarkCyan" BorderThickness="10" CornerRadius="10" Opacity="0.8"/>
         
         <Button Content="_" Width="30" Height="30"
                 HorizontalAlignment="Right" Margin="0,10,50,0"
@@ -30,7 +33,6 @@
                 BorderBrush="Transparent"
                 Click="CloseButton_Click"/>
         
-        <Border Background="DarkSlateGray" BorderBrush="DarkCyan" BorderThickness="10" CornerRadius="10" Opacity="0.8"/>
         <TextBlock Text="Welcome To The Bowling Game!" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontWeight="Bold"/>
 
         <!-- This will show the score from the current round -->
@@ -49,7 +51,7 @@
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="MintCream"/>
-                    <Setter Property="BorderBrush" Value="Salmon"/>
+                    <Setter Property="BorderBrush" Value="DarkCyan"/>
                     <Setter Property="BorderThickness" Value="2"/>
                     <Setter Property="Padding" Value="10"/>
                     <Style.Triggers>
