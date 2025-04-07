@@ -37,7 +37,7 @@
 
         <!-- This will show the score from the current round -->
         <TextBox  Style="{StaticResource TBstyle}" Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
-                  Width="180" Height="40" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                  Width="180" Height="40" Margin="10 0, 0, 45" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                   IsReadOnly="True"/>
         
         <Button Content="Roll It!" Width="100" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click">

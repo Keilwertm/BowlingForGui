@@ -93,9 +93,7 @@ namespace WPFBowling.Views
 
             ResultTextBox.Text = "Game reset. Ready to roll!";
         }
-
-
-        // Dictionary to store cumulative scores for each frame
+        
         Dictionary<int, int> frameScores = new Dictionary<int, int>();
         public BowlingViewModel ViewModel { get; set; }
 
@@ -111,7 +109,6 @@ namespace WPFBowling.Views
 
         public MainWindow()
         {
-
             InitializeComponent();
 
             ViewModel = new BowlingViewModel
@@ -131,7 +128,7 @@ namespace WPFBowling.Views
 
         }
 
-        private List<int> rolls = new List<int>(); // store individual rolls
+        private List<int> rolls = new List<int>(); 
         private int rollInFrame = 1;
         private int remainingPins = 10;
         private int frameIndex = 0;
@@ -153,8 +150,7 @@ namespace WPFBowling.Views
             if (DelivaryResult.Children[currentBoxIndex] is TextBox deliveryBox)
             {
                 string rollText;
-
-                // STRIKE (only on first roll of frame)
+                
                 if (knockdown == 10 && rollInFrame == 1)
                 {
                     rollText = "X";
@@ -177,10 +173,11 @@ namespace WPFBowling.Views
                 leftoverBox.Text = (remainingPins - knockdown).ToString();
 
             ResultTextBox.Text = $"You knocked over {knockdown} pin(s)!";
-            currentBoxIndex++;
+            currentBoxIndex++; 
+            if (rollInFrame == 1 && knockdown == 10)
+                currentBoxIndex++; 
             remainingPins -= knockdown;
-
-            // Frame handling
+            
             if (rollInFrame == 1)
             {
                 if (knockdown == 10) // Strike
@@ -205,7 +202,6 @@ namespace WPFBowling.Views
             
             UpdateCumulativeScores();
         }
-
         
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -224,11 +220,4 @@ namespace WPFBowling.Views
         }
     }
 }
-
-// I still have to account for spares, add up total scores, display the first result as the number of pins on the bottom row, restrict int inputs on the box, and add a plus one to the enter limit so it actually displays the score of the tenth round.
-    // Once that is done I can throw in some simple automation and test cases to validate at the end.
-    // If I have time I want to add the last round to the tenth round, add a Icon to the task bar, improve the look, and add a animation of some sort. 
-    // It would be really cool to have the number of pins fall down across the screen corresponding to the amount of pins that you knock down
-
-    // now - change the roll to a button. It just rolls 1-10. You click roll again to hit the spares, it randomly hits the spares. Finally, if there is a strike it skips the spare step. A strike is a ten, not a randomly generated number to make things easier. 
-    // I think at the end I can add if they get two strikes I can add another text box to appear for the third round...
+                // Okay I just need to fix the round logic, I'm displaying spares and strikes correctly. Then add in round 10 exceptions. Finally, I can do some simple automation. 
