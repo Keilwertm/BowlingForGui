@@ -35,7 +35,7 @@
         
         <TextBlock Text="Welcome To The Bowling Game!" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontWeight="Bold"/>
 
-        <!-- This will show the score from the current round -->
+        <!-- Updating text box depening on delivery results -->
         <TextBox  Style="{StaticResource TBstyle}" Name="ResultTextBox" Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" 
                   Width="180" Height="40" Margin="10 0, 0, 45" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                   IsReadOnly="True"/>
@@ -102,28 +102,15 @@
             <TextBox Width="26" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
         </StackPanel>
         
-        <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,30,55,0">
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
-            <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
+        <StackPanel Name="RoundDisplay" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,90,55,0">
             <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
         </StackPanel>
         
         <StackPanel Name="AllTotalScore" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,90,55,0">
             <TextBox Width="50" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
         </StackPanel>
-
         
         <Button Name="NewGameButton" Content="New Game?" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Click="NewGameButton_Click"/>
-        
-        
-
         
     </Grid>
 </Window>
