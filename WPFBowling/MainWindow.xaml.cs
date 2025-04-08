@@ -9,215 +9,177 @@ namespace WPFBowling.Views
 {
     public partial class MainWindow : Window
     {
-        private void UpdateCumulativeScores()
-        {
-            int score = 0;
-            int rollIndex = 0;
-
-            for (int frame = 0; frame < 10; frame++)
-            {
-                if (rollIndex >= rolls.Count)
-                    break;
-
-                // Strike
-                if (rolls[rollIndex] == 10)
-                {
-                    if (rollIndex + 2 < rolls.Count)
-                    {
-                        score += 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
-                        if (TotalScore.Children[frame] is TextBox scoreBox)
-                            scoreBox.Text = score.ToString();
-                    }
-                    else
-                        break;
-
-                    rollIndex += 1;
-                }
-                // Spare or open
-                else if (rollIndex + 1 < rolls.Count)
-                {
-                    int frameTotal = rolls[rollIndex] + rolls[rollIndex + 1];
-
-                    if (frameTotal == 10) // Spare
-                    {
-                        if (rollIndex + 2 < rolls.Count)
-                        {
-                            score += 10 + rolls[rollIndex + 2];
-                            if (TotalScore.Children[frame] is TextBox scoreBox)
-                                scoreBox.Text = score.ToString();
-                        }
-                        else break;
-                    }
-                    else // Open
-                    {
-                        score += frameTotal;
-                        if (TotalScore.Children[frame] is TextBox scoreBox)
-                            scoreBox.Text = score.ToString();
-                    }
-
-                    rollIndex += 2;
-                }
-                else
-                {
-                    break; 
-                }
-            }
-        }
-
-        private void ResetGame()
-        {
-            rolls.Clear();
-            rollInFrame = 1;
-            remainingPins = 10;
-            frameIndex = 0;
-            totalScore = 0;
-            currentBoxIndex = 0;
-
-            foreach (var child in DelivaryResult.Children)
-            {
-                if (child is TextBox box)
-                    box.Text = "";
-            }
-
-            foreach (var child in PinsLeftover.Children)
-            {
-                if (child is TextBox box)
-                    box.Text = "";
-            }
-
-            foreach (var child in TotalScore.Children)
-            {
-                if (child is TextBox box)
-                    box.Text = "";
-            }
-
-            ResultTextBox.Text = "Game reset. Ready to roll!";
-        }
-        
-        Dictionary<int, int> frameScores = new Dictionary<int, int>();
-        public BowlingViewModel ViewModel { get; set; }
-
-        private Random random = new Random();
-
-        private void RoundInputTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!Regex.IsMatch(e.Text, "^[0-10]+$"))
-            {
-                e.Handled = true;
-            }
-        }
+        private int currentBoxIndex = 0;
+        private int clickState = 0; // 0: first roll, 1: show remaining, 2: do second roll + total
+        private int firstRoll = 0;
+        private int secondRoll = 0;
+        private int remainingPins = 10;
+        private Random rng = new Random();
+        private int currentRound = 0;
+        private int totalScore = 0;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            ViewModel = new BowlingViewModel
-            {
-                Total = 0
-            };
-
-            DataContext = ViewModel;
-
-            for (int i = 0; i < RoundDisplay.Children.Count; i++)
-            {
-                if (RoundDisplay.Children[i] is TextBox textBox)
-                {
-                    textBox.Text = $"R:{i + 1}";
-                }
-            }
-
         }
 
-        private List<int> rolls = new List<int>(); 
-        private int rollInFrame = 1;
-        private int remainingPins = 10;
-        private int frameIndex = 0;
-        private int totalScore = 0;
-        private int currentBoxIndex = 0;
-
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (frameIndex >= 10)
+{
+    if (currentBoxIndex >= DelivaryResult.Children.Count)
+    {
+        ResultTextBox.Text = "Game over!";
+        return;
+    }
+
+    // Update the RoundDisplay TextBox to show the current round with a ":"
+    if (RoundDisplay.Children.Count > 0 && RoundDisplay.Children[0] is TextBox roundDisplayBox)
+    {
+        roundDisplayBox.Text = $"{currentRound}:";
+    }
+
+    switch (clickState)
+    {
+        case 0:
+            // First roll (0–10)
+            firstRoll = rng.Next(0, 11);
+            remainingPins = 10 - firstRoll;
+
+            if (DelivaryResult.Children[currentBoxIndex] is TextBox firstBox)
+                firstBox.Text = firstRoll.ToString();
+
+            ResultTextBox.Text = $"First roll: {firstRoll}";
+            clickState = 1;
+            break;
+
+        case 1:
+            // Show how many pins are left (preview)
+            if (PinsLeftover.Children[currentBoxIndex] is TextBox previewBox)
+                previewBox.Text = remainingPins.ToString();
+
+            ResultTextBox.Text = $"Pins left: {remainingPins}";
+            clickState = 2;
+            break;
+
+        case 2:
+            // Second roll (random from remaining)
+            secondRoll = rng.Next(0, remainingPins + 1); // This can generate a 0 for a gutter ball
+
+            if (PinsLeftover.Children[currentBoxIndex] is TextBox secondBox)
+                secondBox.Text = secondRoll.ToString();
+
+            int total = firstRoll + secondRoll;
+
+            // Update the cumulative total score
+            totalScore += total;
+
+            // Update the AllTotalScore TextBox with the running total
+            if (AllTotalScore.Children.Count > 0 && AllTotalScore.Children[0] is TextBox allTotalBox)
             {
-                ResultTextBox.Text = "Game over! Resetting game...";
-                ResetGame();
-                return;
+                allTotalBox.Text = totalScore.ToString();
             }
 
-            int knockdown = random.Next(0, remainingPins + 1);
-            rolls.Add(knockdown);
-
-            if (DelivaryResult.Children[currentBoxIndex] is TextBox deliveryBox)
+            // If gutter ball, display message and total as 0
+            if (secondRoll == 0)
             {
-                string rollText;
-                
-                if (knockdown == 10 && rollInFrame == 1)
-                {
-                    rollText = "X";
-                }
-                // SPARE (only on second roll of frame, and total pins in frame == 10)
-                else if (rollInFrame == 2 && rolls.Count >= 2 &&
-                         rolls[rolls.Count - 2] + knockdown == 10)
-                {
-                    rollText = "/";
-                }
-                else
-                {
-                    rollText = knockdown.ToString();
-                }
-
-                deliveryBox.Text = rollText;
-            }
-
-            if (PinsLeftover.Children[currentBoxIndex] is TextBox leftoverBox)
-                leftoverBox.Text = (remainingPins - knockdown).ToString();
-
-            ResultTextBox.Text = $"You knocked over {knockdown} pin(s)!";
-            currentBoxIndex++; 
-            if (rollInFrame == 1 && knockdown == 10)
-                currentBoxIndex++; 
-            remainingPins -= knockdown;
-            
-            if (rollInFrame == 1)
-            {
-                if (knockdown == 10) // Strike
-                {
-                    frameIndex++;
-                    rollInFrame = 1;
-                    remainingPins = 10;
-                }
-                else
-                {
-                    rollInFrame = 2;
-                }
+                ResultTextBox.Text = "Gutter ball! Second roll: 0, Total: " + total;
             }
             else
             {
-                frameIndex++;
-                rollInFrame = 1;
-                remainingPins = 10;
+                // Find the appropriate TextBox in the TotalScore StackPanel to update the score
+                if (TotalScore.Children.Count > currentBoxIndex)
+                {
+                    if (TotalScore.Children[currentBoxIndex] is TextBox totalBox)
+                    {
+                        totalBox.Text = total.ToString(); // Set total for that frame
+                    }
+                }
+
+                ResultTextBox.Text = $"Second roll: {secondRoll}, Total: {total}";
             }
-            
-            Console.WriteLine($"Frame: {frameIndex}, RollInFrame: {rollInFrame}, Rolls: {string.Join(",", rolls)}");
-            
-            UpdateCumulativeScores();
+
+            // Reset for next frame
+            currentBoxIndex++;
+            clickState = 0;
+            firstRoll = 0;
+            secondRoll = 0;
+            remainingPins = 10;
+
+            // Increment the round count after each frame
+            currentRound++;
+
+            // If we've reached 10 rounds, reset the game or display "Game over!"
+            if (currentRound > 10)
+            {
+                ResultTextBox.Text = "Game over!";
+                // Make the "New Game?" button visible
+                NewGameButton.Visibility = Visibility.Visible;
+            }
+            break;
+    }
+}
+
+        // Handle the New Game button click event
+        private void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset all the variables for a new game
+            currentBoxIndex = 0;
+            clickState = 0;
+            firstRoll = 0;
+            secondRoll = 0;
+            remainingPins = 10;
+            currentRound = 1;
+
+            // Hide the New Game button
+            NewGameButton.Visibility = Visibility.Collapsed;
+
+            // Reset the UI (if necessary)
+            // For example, clear the TotalScore and DelivaryResult TextBoxes
+            foreach (TextBox textBox in DelivaryResult.Children)
+            {
+                textBox.Clear();
+            }
+
+            foreach (TextBox textBox in PinsLeftover.Children)
+            {
+                textBox.Clear();
+            }
+
+            foreach (TextBox textBox in TotalScore.Children)
+            {
+                textBox.Clear();
+            }
+
+            ResultTextBox.Clear();
+
+            // Reset the round display to show the first round
+            if (RoundDisplay.Children.Count > 0 && RoundDisplay.Children[0] is TextBox roundDisplayBox)
+            {
+                // Only reset the round number in the TextBox, not the TextBox itself
+                roundDisplayBox.Text = $"{currentRound}:";
+            }
         }
-        
+
+
+        // Close button logic
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Drag window logic
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
+        // Minimize window logic
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
     }
 }
-                // Okay I just need to fix the round logic, I'm displaying spares and strikes correctly. Then add in round 10 exceptions. Finally, I can do some simple automation. 
+
+
+// Okay I just need to fix the round logic, I'm displaying spares and strikes correctly. Then add in round 10 exceptions. Finally, I can do some simple automation. 

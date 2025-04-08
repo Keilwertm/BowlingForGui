@@ -115,5 +115,15 @@
             <TextBox Width="26" Margin="15" IsReadOnly="True" Style="{StaticResource TBstyle}" />
         </StackPanel>
         
+        <StackPanel Name="AllTotalScore" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,90,55,0">
+            <TextBox Width="50" Margin="15" Style="{StaticResource TBstyle}" IsReadOnly="True"/>
+        </StackPanel>
+
+        
+        <Button Name="NewGameButton" Content="New Game?" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Click="NewGameButton_Click"/>
+        
+        
+
+        
     </Grid>
 </Window>
