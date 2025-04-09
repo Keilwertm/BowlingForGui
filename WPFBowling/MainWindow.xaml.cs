@@ -15,7 +15,7 @@ namespace WPFBowling.Views
         private int secondRoll = 0;
         private int remainingPins = 10;
         private Random rng = new Random();
-        private int currentRound = 1; // Start from round 1
+        private int currentRound = 1; 
         private int totalScore = 0;
 
         public MainWindow()
@@ -30,14 +30,13 @@ namespace WPFBowling.Views
                 ResultTextBox.Text = "Game over!";
                 return;
             }
-
-            // Update the RoundDisplay TextBox to show the current round with a ":"
+            // Update the RoundDisplay TextBox to show the current round with a : before
             if (RoundDisplay.Children.Count > 0 && RoundDisplay.Children[0] is TextBox roundDisplayTextBox)
             {
-                roundDisplayTextBox.Text = $"{currentRound}:"; // Show current round number
+                roundDisplayTextBox.Text = $"{currentRound}:";
             }
 
-            switch (clickState)
+            switch (clickState) // clickState keeps track of the progression of the rounds
             {
                 case 0:
                     firstRoll = rng.Next(0, 11);
@@ -97,17 +96,15 @@ namespace WPFBowling.Views
 
                     currentRound++;
 
-                    // Update the round display
+                    // Updates the Round Number 
                     if (RoundDisplay.Children.Count > 0 &&
                         RoundDisplay.Children[0] is TextBox roundDisplayTextBoxUpdate)
                     {
                         roundDisplayTextBoxUpdate.Text = $"{currentRound}:";
                     }
-
-                    // Check if the game is over after 10 rounds
                     if (currentRound > 10)
                     {
-                        ResultTextBox.Text = "Game over!";
+                        ResultTextBox.Text = $"Game over! Total Score is {totalScore}";
                         NewGameButton.Visibility = Visibility.Visible;
                     }
 
@@ -122,8 +119,8 @@ namespace WPFBowling.Views
             firstRoll = 0;
             secondRoll = 0;
             remainingPins = 10;
-            totalScore = 0; // Reset total score when starting a new game
-            currentRound = 1; // Start again from round 1
+            totalScore = 0; 
+            currentRound = 1; 
 
             NewGameButton.Visibility = Visibility.Collapsed;
 
@@ -144,8 +141,7 @@ namespace WPFBowling.Views
             }
 
             ResultTextBox.Clear();
-
-            // Reset round display to the first round
+            
             if (RoundDisplay.Children.Count > 0 && RoundDisplay.Children[0] is TextBox roundDisplayTextBoxReset)
             {
                 roundDisplayTextBoxReset.Text = $"{currentRound}:";
@@ -169,3 +165,7 @@ namespace WPFBowling.Views
         }
     }
 }
+
+// To Do: Add in tenth frame logic, automate, show total score game by game.
+
+// bug fix: If the second delivery is a gutter ball, it does not display the new totalscore

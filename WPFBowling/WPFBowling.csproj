@@ -17,4 +17,20 @@
       <Resource Include="bowlingIcon.ico" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Appium.WebDriver" Version="7.2.0" />
+      <PackageReference Include="Microsoft.WinAppDriver.Appium.WebDriver" Version="1.0.1-Preview" />
+      <PackageReference Include="Selenium.Automation.Framework" Version="0.0.1.2" />
+      <PackageReference Include="Selenium.Support" Version="4.31.0" />
+      <PackageReference Include="Selenium.WebDriver" Version="4.31.0" />
+      <PackageReference Include="Selenium.WebDriver.Extensions" Version="4.1.0" />
+      <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.14.0" />
+      <PackageReference Include="Selenium.WebDriver.IEDriver64" Version="3.141.59" />
+      <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
+      <PackageReference Include="Selenium.WebDriverBackedSelenium" Version="4.1.0" />
+      <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
+      <PackageReference Include="WinAppDriverTestFramework" Version="1.0.0" />
+      <PackageReference Include="WinAppDriverWindowsObjectHandler" Version="0.0.0.1" />
+    </ItemGroup>
+
 </Project>
